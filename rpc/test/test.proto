@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package test;
+
+import "test.1.proto";
+option go_package="./test";
+
+message checkReq {
+  string book = 1;
+}
+message checkResp {
+  bool found = 1;
+  int64 price = 2;
+}
+
+service checker {
+  rpc check(checkReq) returns (checkResp);
+  rpc check1(CheckReq1) returns (CheckResp1);
+}

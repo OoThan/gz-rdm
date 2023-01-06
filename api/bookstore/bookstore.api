@@ -1,0 +1,39 @@
+syntax = "v1"
+
+info(
+	title: "bookapi"
+	desc: "Rapid Development of microservices with go-zero"
+	author: "luke"
+	email: "mgoothan.psnl@gmail.com"
+	version: "1.0.0"
+)
+
+type (
+	addReq {
+		Book  string `form:"book"`
+		Price int64  `form:"price"`
+	}
+	addResp {
+		Ok bool `json:"ok"`
+	}
+
+	checkReq {
+		Book string `form:"book"`
+	}
+	checkResp {
+		Found bool  `json:"found"`
+		Price int64 `json:"price"`
+	}
+)
+
+service bookstore-api {
+	@server (
+		handler: AddHandler
+	)
+	get /add(addReq) returns (addResp)
+	
+	@server (
+		handler: CheckHandler
+	)
+	get /check(checkReq) returns (checkResp)
+}
